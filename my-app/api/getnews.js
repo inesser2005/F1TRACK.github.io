@@ -1,4 +1,4 @@
-// api/getNews.js
+// api/getnews.js
 export default async function handler(req, res) {
   const apiKey = "2c40429d2bce443ebff536d44fe8864f";
   const url = `https://newsapi.org/v2/everything?q=F1&pageSize=12{apiKey}`;

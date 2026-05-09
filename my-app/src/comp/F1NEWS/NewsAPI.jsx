@@ -10,7 +10,7 @@ export default function NewsAPI() {
     let isMounted = true;
 
     // Chamamos a rota interna da Vercel para evitar o bloqueio da NewsAPI
-    fetch('/api/getNews')
+ fetch('/api/getnews')
       .then((response) => {
         if (!response.ok) throw new Error("Erro na ponte da API");
         return response.json();
