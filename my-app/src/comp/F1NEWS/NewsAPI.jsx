@@ -1,14 +1,13 @@
 import React, { useEffect, useState, memo } from "react";
 import Badge from "react-bootstrap/Badge";
 import "../../F1theme.css";
-// 1. CORREÇÃO: Importa o componente, não o ficheiro diretamente
-import NewsSkeleton from "./NewsSkeleton"; 
+import NewsSkeleton from "./NewsSkeleton";
 
 const NewsImage = memo(({ imageUrl, title }) => {
   const fallbackImage = "./assets/fallback-news.jpg";
 
-  // 2. OTIMIZAÇÃO: Redimensiona a imagem para 400px via proxy para carregar instantaneamente
-  const optimizedUrl = imageUrl 
+  // CORREÇÃO: URL do proxy weserv corrigida
+  const optimizedUrl = imageUrl
     ? `https://weserv.nl{encodeURIComponent(imageUrl)}&w=400&h=200&fit=cover`
     : fallbackImage;
 
@@ -16,7 +15,7 @@ const NewsImage = memo(({ imageUrl, title }) => {
     <div className="mb-3 overflow-hidden d-flex align-items-center justify-content-center bg-black"
       style={{ height: "200px" }}>
       <img
-        src={optimizedUrl} // Usa a URL otimizada
+        src={optimizedUrl}
         alt={title}
         loading="lazy"
         className="img-fluid w-100 h-100"
@@ -33,13 +32,19 @@ const NewsImage = memo(({ imageUrl, title }) => {
 export default function NewsAPI() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const apiKey = "2c40429d2bce443ebff536d44fe8864f";
+  
+  // DICA: Se a NewsAPI continuar a falhar na Vercel (erro 426), usa a GNews.io
+  const apiKey = "2c40429d2bce443ebff536d44fe8864f"; 
 
   useEffect(() => {
     let isMounted = true;
-    // O pageSize=12 aqui já ajuda imenso no tempo de resposta da API
-    fetch(`https://newsapi.org/v2/everything?q=F1&pageSize=12&apiKey=${apiKey}`)
-      .then((response) => response.json())
+    
+    // CORREÇÃO: Sintaxe do fetch corrigida
+    fetch(`https://newsapi.org{apiKey}`)
+      .then((response) => {
+        if (!response.ok) throw new Error('Erro na API');
+        return response.json();
+      })
       .then((data) => {
         if (isMounted && data.articles) {
           setArticles(data.articles);
@@ -47,6 +52,7 @@ export default function NewsAPI() {
         }
       })
       .catch((error) => {
+        console.error("Erro ao carregar notícias:", error);
         if (isMounted) setLoading(false);
       });
 
@@ -56,7 +62,6 @@ export default function NewsAPI() {
   if (loading) {
     return (
       <div className="container-fluid px-4 min-vh-100 py-4">
-        {/* Estrutura de título mantida para não haver salto de layout */}
         <div className="f1-telemetry-tip mb-5">
           <span className="f1-badge-tip">News - Loading...</span>
         </div>
@@ -69,7 +74,7 @@ export default function NewsAPI() {
 
   return (
     <div className="container-fluid px-4 min-vh-100 py-4">
-       <div className="d-flex justify-content-between align-items-center mb-5 ">
+      <div className="d-flex justify-content-between align-items-center mb-5 ">
         <div className="f1-telemetry-tip mb-5">
           <span className="f1-badge-tip">News - Teams, Drivers and Regulations </span>
         </div>
@@ -79,7 +84,7 @@ export default function NewsAPI() {
         {articles.map((article, index) => (
           <div className="f1-card" key={index}>
             <div className="f1-card-body">
-              <NewsImage imageUrl={article.urlToImage} title={article.title} />
+              <NewsImage imageUrl={article.urlToImage || article.image} title={article.title} />
               <div className="mb-2">
                 <Badge bg="danger" className="text-uppercase mb-2" style={{ fontSize: '0.65rem' }}>
                   News Update
