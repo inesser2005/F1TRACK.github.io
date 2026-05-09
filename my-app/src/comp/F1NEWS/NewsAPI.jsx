@@ -46,7 +46,7 @@ export default function NewsAPI() {
     <div className="container-fluid px-4 min-vh-100 py-4">
       <div className="d-flex justify-content-between align-items-center mb-5 ">
         <div className="f1-telemetry-tip mb-5">
-          <span className="f1-badge-tip">News - Teams, Drivers and Regulations </span>
+          <span className="f1-badge-tip">&nbsp; &nbsp;News - Teams, Drivers and Regulations &nbsp; &nbsp; </span>
         </div>
       </div>
 
