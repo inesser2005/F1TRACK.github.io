@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./F1theme.css";
 
-import Home from "/comp/Home.jsx";
+import Home from "./comp/Home.jsx";
 import Menu from "./comp/Menu.jsx";
 import StandingsAside from "./comp/F1DRIVERS/StandingsAside.jsx"; // Verifica se o ficheiro tem o "s"
 import DriversAPI from "./comp/F1DRIVERS/DriversAPI.jsx";
