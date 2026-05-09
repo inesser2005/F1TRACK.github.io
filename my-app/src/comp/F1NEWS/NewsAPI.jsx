@@ -1,4 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
+import NewsSkeleton from "./NewsSkeleton";
 
 export default function NewsAPI() {
   const [articles, setArticles] = useState([]);
