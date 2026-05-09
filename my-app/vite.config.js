@@ -9,7 +9,6 @@ export default defineConfig({
       },
     }),
   ],
-  // Removi o 'root: src' para o Vite encontrar o index.html na raiz da pasta my-app
   build: {
     outDir: 'dist',
     emptyOutDir: true,
