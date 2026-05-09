@@ -4,7 +4,7 @@ import "./F1theme.css";
 
 import Home from "./comp/Home.jsx";
 import Menu from "./comp/Menu.jsx";
-import StandingsAside from "./comp/F1DRIVERS/StandingsAside.jsx"; // Verifica se o ficheiro tem o "s"
+import StandingsAside from "./comp/F1DRIVERS/StandingsAside.jsx"; 
 import DriversAPI from "./comp/F1DRIVERS/DriversAPI.jsx";
 import TeamsAPI from "./comp/F1TEAMS/TeamsAPI.jsx";
 import TrackAPI from "./comp/F1TRACKS/TrackAPI.jsx";
