@@ -1,0 +1,199 @@
+/* F1Track palette */
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,700;1,900&display=swap');
+
+:root {
+  --f1-red: #e10600;       
+  --f1-black: #0b0b0e;     
+  --f1-dark-grey: #15151e; 
+  --f1-white: #ffffff;
+  --f1-glass: rgba(255, 255, 255, 0.05);
+  --f1-font: 'Titillium Web', sans-serif;
+  --f1-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global resets */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--f1-black);
+  font-family: var(--f1-font);
+  color: var(--f1-white);
+  overflow-x: hidden;
+}
+
+/*Assure the Navigation Visibility */
+.f1-navbar {
+  background-color: var(--f1-black) !important;
+  border-bottom: 3px solid var(--f1-red);
+  min-height: 70px;
+  z-index: 1050;
+}
+
+/* Force links to be visible */
+.f1-navbar .navbar-brand,
+.f1-navbar .f1-nav-link {
+  color: var(--f1-white) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-style: italic;
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+.f1-nav-link:hover, 
+.f1-nav-link.active {
+  color: var(--f1-white) !important;
+  background-color: var(--f1-red) !important;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%); /* Angle cut */
+}
+
+/* Layout Structure */
+/* Force the main area to be the same color as the body */
+.dashboard-main-content {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: var(--f1-black) !important; /* This anulates the grey */
+}
+
+/* Makes the grid not havee a background */
+.f1-dashboard-grid {
+  display: grid;
+  gap: 20px; 
+  grid-template-columns: repeat(3, 1fr); /* Updated to 3 columns */
+  padding: 20px;
+  background-color: transparent !important; /* Avoids any underlying grey */
+}
+
+/* Sidebar Fixing Logic */
+.standings-sidebar {
+  width: 200px; 
+  min-width: 150px;
+  background-color: var(--f1-dark-grey) !important; /* Force color match */
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+}
+
+/* High-Contrast Alerts */
+.f1-telemetry-tip {
+  background: var(--f1-black) !important;
+  border: 1px solid var(--f1-red); 
+  padding: 15px 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 8px 8px 0px var(--f1-red); /* Thick technical shadow */
+  margin-bottom: 40px;
+}
+
+.f1-badge-tip {
+  background: var(--f1-red);
+  color: white;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  font-style: italic;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
+
+/* Card Synchronization */
+.f1-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+  border-left: 4px solid var(--f1-red);
+  border-bottom: 4px solid var(--f1-red);
+  background: var(--f1-dark-grey) !important; /* Force match */
+  transition: transform 0.2s ease;
+}
+
+.f1-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Pushes footer to bottom */
+}
+
+.f1-card-footer {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+/* Scrollbars  */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: var(--f1-red); }
+
+/* Secondary Button */
+.f1-btn {
+  background-color: var(--f1-red);
+  color: var(--f1-white);
+  border: none;
+  padding: 10px 24px;
+  font-family: var(--f1-font);
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-style: italic;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  transition: var(--f1-transition);
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.f1-btn:hover {
+  background-color: var(--f1-white);
+  color: var(--f1-black);
+  transform: translateX(5px) skewX(-2deg);
+  box-shadow: -5px 0 0 var(--f1-red);
+}
+
+.f1-btn:active {
+  transform: scale(0.96) translateX(2px);
+  filter: brightness(0.8);
+}
+/**/
+/* Secondary variant for less prominent actions */
+.f1-btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid var(--f1-white) !important;
+  color: var(--f1-white) !important;
+}
+
+.f1-btn-secondary:hover {
+  background-color: var(--f1-white) !important;
+  color: var(--f1-black) !important;
+}
+
+/* Override Bootstrap Container/Card white-out */
+.container, .container-fluid {
+    background-color: transparent !important;
+}
+
+/* Force Inputs to stay Dark */
+.form-control {
+    background-color: var(--f1-black) !important;
+    color: var(--f1-white) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure placeholder text is subtle */
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Avoid flashes during transitions */
+html, body {
+    background-color: var(--f1-black) !important;
+}
