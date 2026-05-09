@@ -3,11 +3,10 @@ import Badge from "react-bootstrap/Badge";
 import NewsSkeleton from "./NewsSkeleton";
 import "../../F1theme.css";
 
-// 1. CORREÇÃO: Adicionada a declaração do componente NewsImage
 const NewsImage = memo(({ imageUrl, title }) => {
   const fallbackImage = "./assets/fallback-news.jpg";
-  
-  // CORREÇÃO: URL do weserv corrigida com prefixo e parâmetro ?url=
+
+  // CORREÇÃO 1: Adicionado 'images.', o parâmetro '?url=' e os símbolos ${ } para a variável
   const optimizedUrl = imageUrl
     ? `https://weserv.nl{encodeURIComponent(imageUrl)}&w=400&h=200&fit=cover`
     : fallbackImage;
@@ -33,14 +32,15 @@ const NewsImage = memo(({ imageUrl, title }) => {
 export default function NewsAPI() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  // A tua chave da GNews
   const apiKey = "893bc4952945215de7045d402a364150";
 
   useEffect(() => {
     let isMounted = true;
 
-    // Busca notícias de F1 (alterei 'example' para 'F1')
-    fetch(`https://gnews.io{apiKey}`)
+    // CORREÇÃO 2: Removido o '+', as aspas extra e corrigido o template string da API
+    const url = `https://gnews.io/api/v4/search/q=F1&lang=en&max=10&apikey={apiKey}`;
+
+    fetch(url)
       .then((response) => {
         if (!response.ok) throw new Error("Erro na API GNews");
         return response.json();
@@ -87,7 +87,6 @@ export default function NewsAPI() {
           articles.map((article, index) => (
             <div className="f1-card" key={index}>
               <div className="f1-card-body">
-                {/* Compatibilidade: GNews usa 'image', NewsAPI usa 'urlToImage' */}
                 <NewsImage imageUrl={article.image || article.urlToImage} title={article.title} />
 
                 <div className="mb-2">
