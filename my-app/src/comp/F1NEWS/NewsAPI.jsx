@@ -1,48 +1,15 @@
-import React, { useEffect, useState, memo } from "react";
-import Badge from "react-bootstrap/Badge";
-import "../../F1theme.css";
-import NewsSkeleton from "./NewsSkeleton";
-
-const NewsImage = memo(({ imageUrl, title }) => {
-  const fallbackImage = "./assets/fallback-news.jpg";
-
-  // CORREÇÃO: URL do proxy weserv corrigida
-  const optimizedUrl = imageUrl
-    ? `https://weserv.nl{encodeURIComponent(imageUrl)}&w=400&h=200&fit=cover`
-    : fallbackImage;
-
-  return (
-    <div className="mb-3 overflow-hidden d-flex align-items-center justify-content-center bg-black"
-      style={{ height: "200px" }}>
-      <img
-        src={optimizedUrl}
-        alt={title}
-        loading="lazy"
-        className="img-fluid w-100 h-100"
-        style={{ objectFit: "cover" }}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = fallbackImage;
-        }}
-      />
-    </div>
-  );
-});
-
 export default function NewsAPI() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  // DICA: Se a NewsAPI continuar a falhar na Vercel (erro 426), usa a GNews.io
-  const apiKey = "2c40429d2bce443ebff536d44fe8864f"; 
 
+  // O BLOCO ABAIXO SUBSTITUI O TEU ANTIGO USEEFFECT
   useEffect(() => {
     let isMounted = true;
     
-    // CORREÇÃO: Sintaxe do fetch corrigida
-    fetch(`https://newsapi.org{apiKey}`)
+    // Chamamos a rota interna da Vercel para evitar o bloqueio da NewsAPI
+    fetch('/api/getNews') 
       .then((response) => {
-        if (!response.ok) throw new Error('Erro na API');
+        if (!response.ok) throw new Error("Erro na ponte da API");
         return response.json();
       })
       .then((data) => {
@@ -52,7 +19,7 @@ export default function NewsAPI() {
         }
       })
       .catch((error) => {
-        console.error("Erro ao carregar notícias:", error);
+        console.error("Erro:", error);
         if (isMounted) setLoading(false);
       });
 
