@@ -1,3 +1,5 @@
+import React, { useEffect, useState, memo } from "react";
+
 export default function NewsAPI() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -5,9 +7,9 @@ export default function NewsAPI() {
   // O BLOCO ABAIXO SUBSTITUI O TEU ANTIGO USEEFFECT
   useEffect(() => {
     let isMounted = true;
-    
+
     // Chamamos a rota interna da Vercel para evitar o bloqueio da NewsAPI
-    fetch('/api/getNews') 
+    fetch('/api/getNews')
       .then((response) => {
         if (!response.ok) throw new Error("Erro na ponte da API");
         return response.json();
