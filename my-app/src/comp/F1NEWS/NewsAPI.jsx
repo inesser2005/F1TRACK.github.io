@@ -1,23 +1,23 @@
 import React, { useEffect, useState, memo } from "react";
 import Badge from "react-bootstrap/Badge";
-import "../../F1theme.css"; 
-
+import "../../F1theme.css";
+import "./NewsSkeleton.jsx";
 const NewsImage = memo(({ imageUrl, title }) => {
-  const fallbackImage = "./assets/fallback-news.jpg"; 
+  const fallbackImage = "./assets/fallback-news.jpg";
 
   return (
-    <div className="mb-3 overflow-hidden d-flex align-items-center justify-content-center bg-black" 
-         style={{ height: "200px" }}> 
-      <img 
-        src={imageUrl || fallbackImage} 
+    <div className="mb-3 overflow-hidden d-flex align-items-center justify-content-center bg-black"
+      style={{ height: "200px" }}>
+      <img
+        src={imageUrl || fallbackImage}
         alt={title}
-        loading="eager" 
+        loading="lazy"
         className="img-fluid w-100 h-100"
         style={{ objectFit: "cover" }}
-        onError={(e) => { 
-            e.target.onerror = null;
-            e.target.src = fallbackImage;
-        }} 
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = fallbackImage;
+        }}
       />
     </div>
   );
@@ -30,11 +30,11 @@ export default function NewsAPI() {
 
   useEffect(() => {
     let isMounted = true;
-    fetch(`https://newsapi.org/v2/everything?q=F1&apiKey=${apiKey}`)
+    fetch(`https://newsapi.org/v2/everything?q=F1&pageSize=12&apiKey=${apiKey}`)
       .then((response) => response.json())
       .then((data) => {
         if (isMounted && data.articles) {
-          setArticles(data.articles.slice(0, 12)); 
+          setArticles(data.articles.slice(0, 12));
           setLoading(false);
         }
       })
@@ -45,15 +45,24 @@ export default function NewsAPI() {
     return () => { isMounted = false; };
   }, []);
 
-  if (loading) return <div className="text-center p-5 text-white italic">WARMING NEWS FEED...</div>;
+  if (loading) {
+    return (
+      <div className="container-fluid px-4 min-vh-100 py-4">
+        <div className="f1-dashboard-grid">
+          {Array(12).fill(0).map((_, i) => <NewsSkeleton key={i} />)}
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     /* REMOVED: bg-dark here to eliminate the grey background conflict */
     <div className="container-fluid px-4 min-vh-100 py-4">
-     
-       <div className="d-flex justify-content-between align-items-center mb-5 ">
+
+      <div className="d-flex justify-content-between align-items-center mb-5 ">
         <div className="f1-telemetry-tip mb-5">
-          <span className="f1-badge-tip">News - Teams, Drivers and Regulations </span> 
+          <span className="f1-badge-tip">News - Teams, Drivers and Regulations </span>
         </div>
       </div>
 
@@ -61,7 +70,7 @@ export default function NewsAPI() {
         {articles.map((article, index) => (
           <div className="f1-card" key={index}>
             <div className="f1-card-body">
-              
+
               <NewsImage imageUrl={article.urlToImage} title={article.title} />
 
               <div className="mb-2">

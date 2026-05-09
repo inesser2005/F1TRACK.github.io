@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,700;1,900&display=swap');
 
 :root {
-  --f1-red: #e10600;       
-  --f1-black: #0b0b0e;     
-  --f1-dark-grey: #15151e; 
+  --f1-red: #e10600;
+  --f1-black: #0b0b0e;
+  --f1-dark-grey: #15151e;
   --f1-white: #ffffff;
   --f1-glass: rgba(255, 255, 255, 0.05);
   --f1-font: 'Titillium Web', sans-serif;
@@ -12,7 +12,8 @@
 }
 
 /* Global resets */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background-color: var(--f1-black);
@@ -40,11 +41,12 @@ html, body {
   text-decoration: none !important;
 }
 
-.f1-nav-link:hover, 
+.f1-nav-link:hover,
 .f1-nav-link.active {
   color: var(--f1-white) !important;
   background-color: var(--f1-red) !important;
-  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%); /* Angle cut */
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  /* Angle cut */
 }
 
 /* Layout Structure */
@@ -54,23 +56,27 @@ html, body {
   min-width: 0;
   height: 100vh;
   overflow-y: auto;
-  background-color: var(--f1-black) !important; /* This anulates the grey */
+  background-color: var(--f1-black) !important;
+  /* This anulates the grey */
 }
 
 /* Makes the grid not havee a background */
 .f1-dashboard-grid {
   display: grid;
-  gap: 20px; 
-  grid-template-columns: repeat(3, 1fr); /* Updated to 3 columns */
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  /* Updated to 3 columns */
   padding: 20px;
-  background-color: transparent !important; /* Avoids any underlying grey */
+  background-color: transparent !important;
+  /* Avoids any underlying grey */
 }
 
 /* Sidebar Fixing Logic */
 .standings-sidebar {
-  width: 200px; 
+  width: 200px;
   min-width: 150px;
-  background-color: var(--f1-dark-grey) !important; /* Force color match */
+  background-color: var(--f1-dark-grey) !important;
+  /* Force color match */
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   height: 100vh;
   position: sticky;
@@ -81,7 +87,7 @@ html, body {
 /* High-Contrast Alerts */
 .f1-telemetry-tip {
   background: var(--f1-black) !important;
-  border: 1px solid var(--f1-red); 
+  border: 1px solid var(--f1-red);
   padding: 15px 25px;
   font-weight: 700;
   text-transform: uppercase;
@@ -89,7 +95,8 @@ html, body {
   display: flex;
   align-items: center;
   gap: 15px;
-  box-shadow: 8px 8px 0px var(--f1-red); /* Thick technical shadow */
+  box-shadow: 8px 8px 0px var(--f1-red);
+  /* Thick technical shadow */
   margin-bottom: 40px;
 }
 
@@ -107,10 +114,11 @@ html, body {
 .f1-card {
   display: flex;
   flex-direction: column;
-  height: 100%; 
+  height: 100%;
   border-left: 4px solid var(--f1-red);
   border-bottom: 4px solid var(--f1-red);
-  background: var(--f1-dark-grey) !important; /* Force match */
+  background: var(--f1-dark-grey) !important;
+  /* Force match */
   transition: transform 0.2s ease;
 }
 
@@ -118,7 +126,8 @@ html, body {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Pushes footer to bottom */
+  flex-grow: 1;
+  /* Pushes footer to bottom */
 }
 
 .f1-card-footer {
@@ -127,8 +136,13 @@ html, body {
 }
 
 /* Scrollbars  */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: var(--f1-red); }
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--f1-red);
+}
 
 /* Secondary Button */
 .f1-btn {
@@ -163,6 +177,7 @@ html, body {
   transform: scale(0.96) translateX(2px);
   filter: brightness(0.8);
 }
+
 /**/
 /* Secondary variant for less prominent actions */
 .f1-btn-secondary {
@@ -177,23 +192,52 @@ html, body {
 }
 
 /* Override Bootstrap Container/Card white-out */
-.container, .container-fluid {
-    background-color: transparent !important;
+.container,
+.container-fluid {
+  background-color: transparent !important;
 }
 
 /* Force Inputs to stay Dark */
 .form-control {
-    background-color: var(--f1-black) !important;
-    color: var(--f1-white) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: var(--f1-black) !important;
+  color: var(--f1-white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Ensure placeholder text is subtle */
 .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.4) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* Avoid flashes during transitions */
-html, body {
-    background-color: var(--f1-black) !important;
+html,
+body {
+  background-color: var(--f1-black) !important;
+}
+
+.skeleton-card {
+  overflow: hidden;
+  position: relative;
+}
+
+/* Efeito de pulsação suave */
+.skeleton-image,
+.skeleton-badge,
+.skeleton-title,
+.skeleton-text,
+.skeleton-btn {
+  background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
