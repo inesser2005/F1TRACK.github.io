@@ -1,15 +1,22 @@
 import React, { useEffect, useState, memo } from "react";
 import Badge from "react-bootstrap/Badge";
 import "../../F1theme.css";
-import "./NewsSkeleton.jsx";
+// 1. CORREÇÃO: Importa o componente, não o ficheiro diretamente
+import NewsSkeleton from "./NewsSkeleton"; 
+
 const NewsImage = memo(({ imageUrl, title }) => {
   const fallbackImage = "./assets/fallback-news.jpg";
+
+  // 2. OTIMIZAÇÃO: Redimensiona a imagem para 400px via proxy para carregar instantaneamente
+  const optimizedUrl = imageUrl 
+    ? `https://weserv.nl{encodeURIComponent(imageUrl)}&w=400&h=200&fit=cover`
+    : fallbackImage;
 
   return (
     <div className="mb-3 overflow-hidden d-flex align-items-center justify-content-center bg-black"
       style={{ height: "200px" }}>
       <img
-        src={imageUrl || fallbackImage}
+        src={optimizedUrl} // Usa a URL otimizada
         alt={title}
         loading="lazy"
         className="img-fluid w-100 h-100"
@@ -30,11 +37,12 @@ export default function NewsAPI() {
 
   useEffect(() => {
     let isMounted = true;
+    // O pageSize=12 aqui já ajuda imenso no tempo de resposta da API
     fetch(`https://newsapi.org/v2/everything?q=F1&pageSize=12&apiKey=${apiKey}`)
       .then((response) => response.json())
       .then((data) => {
         if (isMounted && data.articles) {
-          setArticles(data.articles.slice(0, 12));
+          setArticles(data.articles);
           setLoading(false);
         }
       })
@@ -48,6 +56,10 @@ export default function NewsAPI() {
   if (loading) {
     return (
       <div className="container-fluid px-4 min-vh-100 py-4">
+        {/* Estrutura de título mantida para não haver salto de layout */}
+        <div className="f1-telemetry-tip mb-5">
+          <span className="f1-badge-tip">News - Loading...</span>
+        </div>
         <div className="f1-dashboard-grid">
           {Array(12).fill(0).map((_, i) => <NewsSkeleton key={i} />)}
         </div>
@@ -55,12 +67,9 @@ export default function NewsAPI() {
     );
   }
 
-
   return (
-    /* REMOVED: bg-dark here to eliminate the grey background conflict */
     <div className="container-fluid px-4 min-vh-100 py-4">
-
-      <div className="d-flex justify-content-between align-items-center mb-5 ">
+       <div className="d-flex justify-content-between align-items-center mb-5 ">
         <div className="f1-telemetry-tip mb-5">
           <span className="f1-badge-tip">News - Teams, Drivers and Regulations </span>
         </div>
@@ -70,9 +79,7 @@ export default function NewsAPI() {
         {articles.map((article, index) => (
           <div className="f1-card" key={index}>
             <div className="f1-card-body">
-
               <NewsImage imageUrl={article.urlToImage} title={article.title} />
-
               <div className="mb-2">
                 <Badge bg="danger" className="text-uppercase mb-2" style={{ fontSize: '0.65rem' }}>
                   News Update
@@ -81,7 +88,6 @@ export default function NewsAPI() {
                   {article.title}
                 </h5>
               </div>
-
               <div className="f1-card-footer">
                 <p className="mb-4 opacity-75" style={{ fontSize: '0.85rem' }}>
                   {article.description ? article.description.slice(0, 100) + "..." : "No technical description available."}
