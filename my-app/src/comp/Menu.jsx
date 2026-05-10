@@ -31,11 +31,11 @@ export default function Menu() {
     }
   };
 
-  const isActive = (path) => location.pathname === path ? "active" : "";
+const isActive = (path) => location.pathname === path ? "active" : "";
 
-  const menuItems = ["Home", "Drivers", "Teams", "Tracks", "News", "Weather"];
+const menuItems = ["Home", "Drivers", "Teams", "Tracks", "News", "Weather"];
 
-  return (
+return (
     <Navbar expand="lg" sticky="top" variant="dark" className="f1-navbar py-0 navbar-dark">
       <Container fluid className="px-4">
         <Navbar.Brand as={Link} to="/" className="f1-brand d-flex align-items-center">
