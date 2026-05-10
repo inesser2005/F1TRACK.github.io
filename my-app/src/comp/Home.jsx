@@ -1,5 +1,6 @@
 import React from "react";
 import "../F1theme.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -28,7 +29,7 @@ export default function Home() {
               <span className="spinner-grow spinner-grow-sm text-success me-3"></span>
               <span className="small text-white opacity-75">All F1 APIs Operational</span>
             </div>
-    
+
             <div className="f1-card-footer border-top border-secondary border-opacity-25">
               <span className="small opacity-50 text-white">LATENCY: 24ms</span>
             </div>

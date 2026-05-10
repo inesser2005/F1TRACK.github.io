@@ -6,6 +6,8 @@ import Container from "react-bootstrap/Container";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import '../F1theme.css';
+import f1Logo from "../assets/F1TRACKER_LOGO.png";
+
 
 export default function Menu() {
   const location = useLocation();
@@ -37,7 +39,9 @@ export default function Menu() {
     <Navbar expand="lg" sticky="top" variant="dark" className="f1-navbar py-0 navbar-dark">
       <Container fluid className="px-4">
         <Navbar.Brand as={Link} to="/" className="f1-brand d-flex align-items-center">
-          <span className="fw-black italic text-white"><img src="my-..\assets\F1TRACKER_LOGO.png" className="" alt="" /></span>
+          <span className="fw-black italic text-white">
+            <img src={f1Logo} alt="Logo" />
+          </span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="f1-navbar-nav" className="border-0 custom-toggler" />
