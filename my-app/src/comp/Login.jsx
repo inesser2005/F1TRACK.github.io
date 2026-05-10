@@ -11,14 +11,13 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // ERROR CHECK: If login is undefined, check your AuthProvider export
       await login(email, password);
       navigate("/");
     } catch (error) {
       alert("AUTH_ERROR: " + error.message);
     }
   };
-  const { loginWithGoogle } = useAuth(); // Pull the new function
+  const { loginWithGoogle } = useAuth();
 
   const handleGoogleSignIn = async () => {
     try {
@@ -56,7 +55,7 @@ export default function Login() {
             <input
               type="email"
               className="form-control bg-black text-white border-secondary shadow-none"
-              value={email} // FIX: Two-way binding for state
+              value={email} // Two-way binding for state
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -68,7 +67,7 @@ export default function Login() {
             <input
               type="password"
               className="form-control bg-black text-white border-secondary shadow-none"
-              value={password} // FIX: Two-way binding for state
+              value={password} // Two-way binding for state
               onChange={(e) => setPassword(e.target.value)}
               required
             />

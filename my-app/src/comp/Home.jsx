@@ -4,7 +4,7 @@ import "../F1theme.css";
 export default function Home() {
   return (
     <div className="container-fluid px-4 min-vh-100 py-4">
-      
+
       {/* Header Section  */}
       <div className="f1-telemetry-tip mb-5">
         <span className="f1-badge-tip">SYSTEM STATUS</span>
@@ -19,8 +19,8 @@ export default function Home() {
       </p>
 
       <div className="f1-dashboard-grid">
-        
-        {/* System Diagnostics */}
+
+        {/* API Diagnostics */}
         <div className="f1-card">
           <div className="f1-card-body">
             <h5 className="text-danger fw-black italic small mb-3">DIAGNOSTICS</h5>
@@ -28,7 +28,7 @@ export default function Home() {
               <span className="spinner-grow spinner-grow-sm text-success me-3"></span>
               <span className="small text-white opacity-75">All F1 APIs Operational</span>
             </div>
-            {/* Pinned Footer to have alignment */}
+    
             <div className="f1-card-footer border-top border-secondary border-opacity-25">
               <span className="small opacity-50 text-white">LATENCY: 24ms</span>
             </div>
@@ -40,10 +40,12 @@ export default function Home() {
           <div className="f1-card-body">
             <h5 className="text-danger fw-black italic small mb-3">DATA LINK</h5>
             <p className="small text-white opacity-75">
-              Switch to the <strong>Drivers</strong> tab to see the confirmed 2026 grid updates including Audi and Cadillac.
+              Switch to the <a as={Link}
+                to="/Drivers"
+                className={`${isActive("/Drivers")}`}>Drivers</a> tab to see the confirmed 2026 grid updates including Audi and Cadillac.
             </p>
             <div className="f1-card-footer">
-               <button className="f1-btn w-100 py-1">GO TO DRIVERS</button>
+              <button className="f1-btn w-100 py-1"><a href="">GO TO DRIVERS</a></button>
             </div>
           </div>
         </div>

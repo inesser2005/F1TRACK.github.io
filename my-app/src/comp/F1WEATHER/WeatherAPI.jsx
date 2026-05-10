@@ -1,6 +1,5 @@
 import React, { useState, useEffect, memo } from "react";
 import Badge from "react-bootstrap/Badge";
-// Relative path to find src/F1theme.css
 import "../../F1theme.css";
 
 const TRACKS = [
