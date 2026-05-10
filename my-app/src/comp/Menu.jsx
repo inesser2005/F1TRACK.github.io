@@ -39,7 +39,7 @@ export default function Menu() {
       <Container fluid className="px-4">
         <Navbar.Brand as={Link} to="/" className="f1-brand d-flex align-items-center">
           <span className="fw-black italic text-white">
-            <img src={f1Logo} alt="Logo" />
+            <img src={f1Logo} className="f1-logo" alt="Logo" style={{ height: "200px", width: "auto" }} />
           </span>
         </Navbar.Brand>
 

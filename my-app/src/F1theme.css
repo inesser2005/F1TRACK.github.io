@@ -241,3 +241,8 @@ body {
     background-position: -200% 0;
   }
 }
+
+.f1-logo {
+  height: 75px !important;
+  width: auto;
+}
