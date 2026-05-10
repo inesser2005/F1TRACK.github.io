@@ -5,7 +5,6 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import '../F1theme.css';
 import f1Logo from "../assets/F1TRACKER_LOGO.png";
 
 
@@ -31,11 +30,11 @@ export default function Menu() {
     }
   };
 
-const isActive = (path) => location.pathname === path ? "active" : "";
+  const isActive = (path) => location.pathname === path ? "active" : "";
 
-const menuItems = ["Home", "Drivers", "Teams", "Tracks", "News", "Weather"];
+  const menuItems = ["Home", "Drivers", "Teams", "Tracks", "News", "Weather"];
 
-return (
+  return (
     <Navbar expand="lg" sticky="top" variant="dark" className="f1-navbar py-0 navbar-dark">
       <Container fluid className="px-4">
         <Navbar.Brand as={Link} to="/" className="f1-brand d-flex align-items-center">

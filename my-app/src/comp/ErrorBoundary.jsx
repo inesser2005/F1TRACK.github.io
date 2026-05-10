@@ -26,7 +26,7 @@ class ErrorBoundary extends React.Component {
               <span style={{ fontSize: "4rem" }}>🛠️</span>
             </div>
             <h3 className="text-white text-uppercase italic">Mechanical Failure</h3>
-            
+
             {/* NOVO: Bloco para mostrar o erro real */}
             <div className="mt-4 p-3 bg-black border border-secondary text-start">
               <p className="text-danger fw-bold mb-1" style={{ fontSize: "0.8rem", fontFamily: "monospace" }}>
@@ -40,9 +40,9 @@ class ErrorBoundary extends React.Component {
             <p className="text-white opacity-50 my-4">
               The stewards are investigating the telemetry stream.
             </p>
-            
-            <button 
-              className="f1-btn w-100" 
+
+            <button
+              className="f1-btn w-100"
               onClick={() => window.location.reload()}
             >
               REJOIN SESSION
@@ -52,7 +52,7 @@ class ErrorBoundary extends React.Component {
       );
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 

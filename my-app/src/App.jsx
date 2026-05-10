@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./F1theme.css";
-
 import Home from "./comp/Home.jsx";
 import Menu from "./comp/Menu.jsx";
-import StandingsAside from "./comp/F1DRIVERS/StandingsAside.jsx"; 
+import StandingsAside from "./comp/F1DRIVERS/StandingsAside.jsx";
 import DriversAPI from "./comp/F1DRIVERS/DriversAPI.jsx";
 import TeamsAPI from "./comp/F1TEAMS/TeamsAPI.jsx";
 import TrackAPI from "./comp/F1TRACKS/TrackAPI.jsx";
@@ -27,7 +26,7 @@ export default function App() {
             style={{ backgroundColor: "#0b0b0e" }}
           >
             {/* Barra lateral agora à esquerda */}
-            <aside className="standings-sidebar d-none d-xl-block" > 
+            <aside className="standings-sidebar d-none d-xl-block" >
               <StandingsAside />
             </aside>
 
@@ -41,7 +40,7 @@ export default function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
-                  
+
                   <Route path="/profile" element={
                     <ProtectedRoute>
                       <Profile />
